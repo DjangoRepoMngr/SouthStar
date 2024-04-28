@@ -28,7 +28,7 @@ class client(GeneralModel):
     address = models.CharField(max_length=400, null=True, verbose_name='آدرس')
     client_status = models.IntegerField('وضعیت مشتری', default=1,choices=StatusChoices)
     tablo = models.CharField(max_length=200, null=True, blank= True, verbose_name='تابلو')
-    description = models.CharField(max_length=400, verbose_name='توضیحات', blank= True)
+    description = models.TextField(verbose_name='توضیحات', blank= True)
     route = models.ForeignKey("route",on_delete=models.PROTECT, null=True, verbose_name='مسیر')
 
     class Meta:
@@ -43,6 +43,7 @@ class client_buy(GeneralModel):
 
     count_products = models.IntegerField('تعداد کارتن',)
     client = models.ForeignKey("client",on_delete=models.PROTECT, null=True, verbose_name='مشتری')
+    Visitor = models.ForeignKey("Visitor",on_delete=models.PROTECT, null=True, verbose_name='ویزیتور')
 
     class Meta:
         verbose_name_plural = "خرید مشتری"
@@ -50,4 +51,16 @@ class client_buy(GeneralModel):
 
     def __str__(self):
         return str(self.client)
+
+class Visitor(GeneralModel):
+
+    name  = models.CharField(max_length=200, verbose_name='نام ویزیتور')
+    phone_number = models.CharField(verbose_name='شماره همراه', max_length=11, null=True, unique=True)
+
+    class Meta:
+        verbose_name_plural = "ویزیتور"
+        verbose_name = "ویزیتور"
+
+    def __str__(self):
+        return str(self.name)
 

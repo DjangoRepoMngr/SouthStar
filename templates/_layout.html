@@ -58,174 +58,49 @@
 	text-decoration: none;
 }
 
+body {
+      padding-top: 50px;
+    }
+    .jumbotron {
+      text-align: center;
+    }
+
 </style>
 
 <body class="animsition">
-    <div class="page-wrapper">
-        <!-- HEADER MOBILE-->
-        <header class="header-mobile d-block d-lg-none">
-            <div class="header-mobile__bar">
-                <div class="container-fluid">
-                    <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
-                            <img src="/static/assets/images/icon/logo.png" alt="CoolAdmin" />
-                        </a>
-                        <button class="hamburger hamburger--slider" type="button">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <!-- END HEADER MOBILE-->
 
-        <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar d-none d-lg-block">
-            <div class="logo">
-                <!-- <a href="#">
-                    <img src="/static/assets/images/icon/logo.png" alt="Cool Admin" />
-                </a> -->
-            </div>
-            <div class="menu-sidebar__content js-scrollbar1">
-                <nav id="navbarID" class="navbar-sidebar">
-                    <ul class="list-unstyled navbar__list">
-                        <li class="active has-sub">
-                            <a class="js-arrow" href="/">
-                                <i class="fas fa-tachometer-alt"></i>داشبورد</a>
-
-                        </li>
-
-                        <li>
-                            <a class="js-arrow" href="#">
-                                <i class="fa fa-cubes" aria-hidden="true"></i>اطلاعات پایه</a>
-                                <ul class="list-unstyled navbar__sub-list js-sub-list">
-
-                                <li>
-                                    <a href="#"> لیست مراکز آموزشگاهی</a>
-                                </li>
-
-                                <li>
-                                    <a href="#">لیست دسته بندی</a>
-                                </li>
-
-                                <li>
-                                    <a href="#">لیست  دوره</a>
-                                </li>
-
-                                <li>
-                                    <a href="#">لیست  تخفیفات</a>
-                                </li>
-
-                                <li>
-                                    <a class="js-arrow" href="#">
-                                        <i class="fa fa-sort-amount-asc"></i> دسته و زیر دسته هزینه</a>
-                                        <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                        <li>
-                                            <a href="#">لیست دسته هزینه </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">لیست زیر دسته هزینه</a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li>
-                                <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>آزمون</a>
-                                    <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="#">لیست آزمون ها</a>
-                                </li>
-                            </ul>
-                                <li>
-
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-chart-bar" aria-hidden="true"></i>گزارش گیری</a>
-
-                                <ul class="list-unstyled navbar__sub-list js-sub-list">
-
-                                    <li>
-                                        <a href="#">گزارش هزینه مراکز</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">گزارش هزینه دوره ها</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">گزارش درآمد دوره ها</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#">گزارش آزمون های برگزارش شده </a>
-                                    </li>
-                                </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </aside>
-        <!-- END MENU SIDEBAR-->
-
-        <!-- PAGE CONTAINER-->
-        <div class="page-container">
-            <!-- HEADER DESKTOP-->
-            <header class="header-desktop">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="header-wrap">
-                            <div class="header-button">
-
-                                <div class="account-wrap">
-                                    <div class="account-item clearfix js-item-menu">
-                                        <div class="content">
-                                            <a class="js-acc-btn" href="#">{{request.user.username}}</a>
-                                        </div>
-                                        <div class="account-dropdown js-dropdown">
-                                            <div class="info clearfix">
-                                                <div class="content">
-                                                    <h5 class="name">
-                                                        <a href="#">{{request.user.get_full_name}}</a>
-                                                    </h5>
-                                                    <span class="email">{{request.user.email}}</span>
-                                                </div>
-                                            </div>
-                                            <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>پروفایل</a>
-                                                </div>
-                                            </div>
-                                            <div class="account-dropdown__footer">
-                                                <a href="/logout">
-                                                    <i class="zmdi zmdi-power"></i>خروج</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-            <!-- HEADER DESKTOP-->
-
-            <!-- MAIN CONTENT-->
-            <div class="main-content">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-            {% block pageContent %}{% endblock %}
-                    </div>
-                </div>
-            </div>
-            <!-- END MAIN CONTENT-->
-            <!-- END PAGE CONTAINER-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="#">لوگوی شما</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">صفحه اصلی
+                  <span class="sr-only">(فعلی)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">درباره ما</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">خدمات</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">تماس</a>
+              </li>
+            </ul>
+          </div>
         </div>
+      </nav>
 
+        <!-- Page Content -->
+    <div class="container">
+        <div class="jumbotron">
+            {% block pageContent %}{% endblock %}
+        </div>
     </div>
 
     <!-- Persian Datepicker JS-->

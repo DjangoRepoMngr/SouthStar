@@ -48,14 +48,4 @@ def login_timeout(request):
 @login_required
 def home(request):
 
-
-    context = {
-
-        'institute_center_list' : 1 ,
-        'institute_count':1,
-        'course_count':1,
-        'student_count':1,
-        'exam_count':1,
-    }
-
-    return render(request, 'Home.html',context)
+    return render(request, 'Home.html')

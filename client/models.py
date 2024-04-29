@@ -1,5 +1,6 @@
 from django.db import models
 from utils.general_model import GeneralModel
+from django.contrib.auth.models import User
 
 Active = 1
 Deactive = -1
@@ -43,7 +44,7 @@ class client_buy(GeneralModel):
 
     count_products = models.IntegerField('تعداد کارتن',)
     client = models.ForeignKey("client",on_delete=models.PROTECT, null=True, verbose_name='مشتری')
-    Visitor = models.ForeignKey("Visitor",on_delete=models.PROTECT, null=True, verbose_name='ویزیتور')
+    visitor = models.ForeignKey(User ,on_delete=models.PROTECT, null=True, verbose_name='ویزیتور')
 
     class Meta:
         verbose_name_plural = "خرید مشتری"
@@ -51,16 +52,4 @@ class client_buy(GeneralModel):
 
     def __str__(self):
         return str(self.client)
-
-class Visitor(GeneralModel):
-
-    name  = models.CharField(max_length=200, verbose_name='نام ویزیتور')
-    phone_number = models.CharField(verbose_name='شماره همراه', max_length=11, null=True, unique=True)
-
-    class Meta:
-        verbose_name_plural = "ویزیتور"
-        verbose_name = "ویزیتور"
-
-    def __str__(self):
-        return str(self.name)
 

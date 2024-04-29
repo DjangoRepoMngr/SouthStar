@@ -1,0 +1,104 @@
+{% extends '_layout.html' %}
+{% load static %}
+
+<!-- JS BLOCK -->
+{% block jsBlock %}
+    <script>
+        $('select').addClass('form-control');
+        $('input[type=file]').addClass('form-control');
+        $('input[type=number]').addClass('form-control');
+        $('input[type=text]').addClass('form-control');
+        $('input[type=email]').addClass('form-control');
+
+
+    </script>
+
+    {% if request.user.birthday_age is not None %}
+        <script>
+            $(document).ready(function(){
+                $('#birthday_age').val(normalizeDate("{{request.user.birthday_age}}"));
+
+            });
+        </script>
+    {% endif %}
+
+{% endblock %}
+<!-- CSS BLOCK -->
+{% block cssBlock %}
+{% endblock %}
+
+{% block pageContent %}
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+        </div>
+        <div class="card-body card-block">
+            <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="text-input" class=" form-control-label">نام </label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        {{form.first_name}}
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="text-input" class=" form-control-label">نام خانوادگی </label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        {{form.last_name}}
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="disabled-input" class=" form-control-label">نام کاربری</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        {{form.username}}
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="email-input" class=" form-control-label"> کد ملی</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        {{form.nationalCode}}
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="password-input" class=" form-control-label">شماره تلفن</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        {{form.mobileNumber}}
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="textarea-input" class=" form-control-label">تاریخ تولد</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <input id="birthday_age" type="text" class="datepickercls" name="birthday_age" />
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> ذخیره
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+
+{% endblock %}

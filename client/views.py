@@ -7,6 +7,7 @@ from django.urls import resolve, reverse
 from django.contrib.auth.decorators import login_required
 
 from client.forms import CreateIRouteForm
+from client.models import route
 
 
 
@@ -68,3 +69,19 @@ def route_creator(request):
             return redirect('client:route_list')
 
     return render(request, 'route_creator.html',context)
+
+@login_required
+@csrf_exempt
+def route_list(request):
+
+    list = route.objects.filter(status = 1)
+    name_query = request.GET.get('name_query')
+
+    if name_query != None:
+        list = list.filter(name__contains = name_query)
+
+    context = {
+        'list': list,
+    }
+
+    return render(request, 'route_list.html', context)

@@ -1,0 +1,49 @@
+
+{% extends '_layout.html' %}
+{% load static %}
+
+<!-- JS BLOCK -->
+{% block jsBlock %}
+{% endblock %}
+<!-- CSS BLOCK -->
+{% block cssBlock %}
+{% endblock %}
+
+{% block pageContent %}
+<h3 class="title-5 m-b-35">لیست مسیر</h3>
+<div class="table-responsive">
+  <div class="table-toolbar mb-3">
+    <a href="/route_creator" class="btn btn-primary btn-sm float-right">افزودن مسیر <span class="fa fa-plus"></span></a>
+  </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">کد مسیر</th>
+          <th scope="col">نام مسیر</th>
+          <th scope="col">تعداد مشتری فعال</th>
+          <th scope="col">تعداد مشتری غیر فعال</th>
+          <th scope="col">نام فروشنده</th>
+          <th scope="col">عملیات</th>
+        </tr>
+      </thead>
+      <tbody>
+
+          {% for item in list %}
+              <tr>
+                <td>{{ item.code }}</td>
+                <td> {{ item.name }} </td>
+                <td>20</td>
+                <td>5</td>
+                <td>فروشنده 1</td>
+                <td>
+                  <button type="button" class="btn btn-danger btn-sm">حذف</button>
+                  <button type="button" class="btn btn-warning btn-sm">ویرایش</button>
+                </td>
+              </tr>
+          {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+
+{% endblock %}

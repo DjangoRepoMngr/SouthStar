@@ -13,5 +13,6 @@ urlpatterns = [
 
     # route
     path('route_creator/', views.route_creator, name='route_creator'),
+    path('route_list/', views.route_list, name='route_list'),
 
 ]

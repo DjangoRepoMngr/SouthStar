@@ -6,6 +6,8 @@ from django.contrib import messages
 from django.urls import resolve, reverse
 from django.contrib.auth.decorators import login_required
 
+from client.forms import CreateIRouteForm
+
 
 
 @csrf_exempt
@@ -49,3 +51,20 @@ def login_timeout(request):
 def home(request):
 
     return render(request, 'Home.html')
+
+@login_required
+@csrf_exempt
+def route_creator(request):
+
+    form = CreateIRouteForm(request.POST or None)
+
+    context = {
+        'form' : form ,
+    }
+
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect('client:route_list')
+
+    return render(request, 'route_creator.html',context)

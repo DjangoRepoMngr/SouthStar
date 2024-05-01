@@ -36,8 +36,9 @@
                 <td>5</td>
                 <td>فروشنده 1</td>
                 <td>
-                  <button type="button" class="btn btn-danger btn-sm">حذف</button>
-                  <button type="button" class="btn btn-warning btn-sm">ویرایش</button>
+                  <div class="table-toolbar mb-3">
+                    <a href="/route_edit/{{ item.id }}" class="btn btn-warning btn-sm">ویرایش</a>
+                  </div>
                 </td>
               </tr>
           {% endfor %}

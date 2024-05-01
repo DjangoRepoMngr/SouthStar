@@ -85,3 +85,22 @@ def route_list(request):
     }
 
     return render(request, 'route_list.html', context)
+
+
+@login_required
+@csrf_exempt
+def route_edit(request,id):
+
+    obj = get_object_or_404(route,id = id)
+    form = CreateIRouteForm(request.POST or None, instance= obj)
+
+    context = {
+        'form' : form ,
+    }
+
+    if request.method == "POST":
+        if form.is_valid():
+            obj = form.save()
+            return redirect('client:route_list')
+
+    return render(request, 'route_creator.html',context)

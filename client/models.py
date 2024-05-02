@@ -34,11 +34,16 @@ class client(GeneralModel):
 
     name = models.CharField(max_length=200, verbose_name='نام مشتری')
     phone_number = models.CharField(verbose_name='شماره همراه', max_length=11, null=True, unique=True)
-    address = models.CharField(max_length=400, null=True, verbose_name='آدرس')
+    address = models.TextField(verbose_name='آدرس', default='آدرس')
     client_status = models.IntegerField('وضعیت مشتری', default=1,choices=StatusChoices)
     tablo = models.CharField(max_length=200, null=True, blank= True, verbose_name='تابلو')
     description = models.TextField(verbose_name='توضیحات', blank= True)
     route = models.ForeignKey("route",on_delete=models.PROTECT, null=True, verbose_name='مسیر')
+    is_changed_location = models.BooleanField(default=False, verbose_name='آیا تغییر مسیر داده است')
+    is_black_list = models.BooleanField(default=False, verbose_name='آیا لیست سیاه است')
+    is_dishonest = models.BooleanField(default=False, verbose_name='آیا بد حساب است')
+    national_code = models.CharField(verbose_name='کد ملی', max_length=10, null=True, blank= True, unique=True)
+    economy_code = models.CharField(verbose_name='کد اقتصادی', max_length=200, null=True, blank= True, unique=True)
 
     class Meta:
         verbose_name_plural = "مشتری"

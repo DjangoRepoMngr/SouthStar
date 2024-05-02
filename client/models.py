@@ -9,11 +9,18 @@ StatusChoices = (
     (Deactive, "غیر فعال"),
 )
 
+class CustomUser(User):
+    class Meta:
+        proxy = True  # This ensures that you are creating a proxy model
+
+    def __str__(self):
+        return self.get_full_name() if self.get_full_name() else self.username
+
 class route(GeneralModel):
 
     name = models.CharField(max_length=200, verbose_name='نام مسیر')
     code = models.IntegerField('کد مسیر ',)
-    visitor = models.ForeignKey( User ,on_delete=models.PROTECT, null=True, verbose_name='فروشنده')
+    visitor = models.ForeignKey( CustomUser ,on_delete=models.PROTECT, null=True, verbose_name='فروشنده')
 
     class Meta:
         verbose_name_plural = "مسیر"
@@ -45,7 +52,7 @@ class client_buy(GeneralModel):
 
     count_products = models.IntegerField('تعداد کارتن',)
     client = models.ForeignKey("client",on_delete=models.PROTECT, null=True, verbose_name='مشتری')
-    visitor = models.ForeignKey(User ,on_delete=models.PROTECT, null=True, verbose_name='ویزیتور')
+    visitor = models.ForeignKey(CustomUser ,on_delete=models.PROTECT, null=True, verbose_name='ویزیتور')
 
     class Meta:
         verbose_name_plural = "خرید مشتری"

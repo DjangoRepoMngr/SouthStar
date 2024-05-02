@@ -20,8 +20,11 @@
         <tr>
           <th scope="col">کد مسیر</th>
           <th scope="col">نام مسیر</th>
-          <th scope="col">تعداد مشتری فعال</th>
-          <th scope="col">تعداد مشتری غیر فعال</th>
+          <th scope="col"> م فعال</th>
+          <th scope="col"> م غیر فعال</th>
+          <th scope="col">م جابحا شده</th>
+          <th scope="col">م لیست سیاه</th>
+          <th scope="col">م بدحساب</th>
           <th scope="col">نام فروشنده</th>
           <th scope="col">عملیات</th>
         </tr>
@@ -33,8 +36,11 @@
                 <td>{{ item.code }}</td>
                 <td> {{ item.name }} </td>
                 <td>20</td>
-                <td>5</td>
-                <td>فروشنده 1</td>
+                <td>4</td>
+                <td>2</td>
+                <td>50</td>
+                <td>24</td>
+                <td>{{ item.visitor }}</td>
                 <td>
                   <div class="table-toolbar mb-3">
                     <a href="/route_edit/{{ item.id }}" class="btn btn-warning btn-sm">ویرایش</a>

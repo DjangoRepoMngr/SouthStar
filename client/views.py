@@ -5,7 +5,7 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib import messages
 from django.urls import resolve, reverse
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.models import User
 from client.forms import CreateIRouteForm
 from client.models import route
 

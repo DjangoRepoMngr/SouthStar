@@ -13,6 +13,7 @@ class route(GeneralModel):
 
     name = models.CharField(max_length=200, verbose_name='نام مسیر')
     code = models.IntegerField('کد مسیر ',)
+    visitor = models.ForeignKey( User ,on_delete=models.PROTECT, null=True, verbose_name='فروشنده')
 
     class Meta:
         verbose_name_plural = "مسیر"

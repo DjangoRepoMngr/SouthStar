@@ -14,3 +14,9 @@ class CreateIRouteForm(forms.ModelForm):
         super(CreateIRouteForm, self).__init__(*args, **kwargs)
         self.fields['visitor'].queryset = CustomUser.objects.filter(is_active=True, groups__name='visitor')
         print(self.fields)
+
+
+class ClientForm(forms.ModelForm):
+    class Meta:
+        model = route
+        exclude  = ('status','create_date')

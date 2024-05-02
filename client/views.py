@@ -4,10 +4,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import logout, authenticate, login
 from django.contrib import messages
 from django.urls import resolve, reverse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from client.forms import CreateIRouteForm
 from client.models import route
-
 
 
 @csrf_exempt
@@ -53,6 +52,7 @@ def home(request):
     return render(request, 'Home.html')
 
 @login_required
+@user_passes_test(lambda u: u.is_superuser or u.groups.filter(name='supervisor').exists())
 @csrf_exempt
 def route_creator(request):
 
@@ -70,6 +70,7 @@ def route_creator(request):
     return render(request, 'route_creator.html',context)
 
 @login_required
+@user_passes_test(lambda u: u.is_superuser or u.groups.filter(name='supervisor').exists())
 @csrf_exempt
 def route_list(request):
 
@@ -87,6 +88,7 @@ def route_list(request):
 
 
 @login_required
+@user_passes_test(lambda u: u.is_superuser or u.groups.filter(name='supervisor').exists())
 @csrf_exempt
 def route_edit(request,id):
 

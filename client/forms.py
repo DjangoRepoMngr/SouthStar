@@ -1,7 +1,7 @@
 # forms.py
 
 from django import forms
-from .models import route
+from .models import route, client
 from .models import CustomUser
 
 
@@ -18,5 +18,5 @@ class CreateIRouteForm(forms.ModelForm):
 
 class ClientForm(forms.ModelForm):
     class Meta:
-        model = route
+        model = client
         exclude  = ('status','create_date')

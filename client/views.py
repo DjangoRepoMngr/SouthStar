@@ -5,7 +5,7 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib import messages
 from django.urls import resolve, reverse
 from django.contrib.auth.decorators import login_required, user_passes_test
-from client.forms import CreateIRouteForm
+from client.forms import CreateIRouteForm, ClientForm
 from client.models import route
 
 
@@ -105,3 +105,25 @@ def route_edit(request,id):
             return redirect('client:route_list')
 
     return render(request, 'route_creator.html',context)
+
+
+@login_required
+@csrf_exempt
+def client_creator(request):
+
+    form = ClientForm(request.POST or None)
+
+    context = {
+        'form' : form ,
+    }
+
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect('client:route_list')
+
+        else:
+            # Add form errors to context
+            context['form_errors'] = form.errors.as_ul()
+
+    return render(request, 'client_creator.html',context)

@@ -1,0 +1,81 @@
+
+{% extends '_layout.html' %}
+{% load static %}
+
+<!-- JS BLOCK -->
+{% block jsBlock %}
+{% endblock %}
+<!-- CSS BLOCK -->
+{% block cssBlock %}
+{% endblock %}
+
+{% block pageContent %}
+<h3 class="title-5 m-b-35"> ایجاد مشتری</h3>
+
+{% for field in form %}
+  <div class="field-wrapper">
+
+    {% if field.errors %}
+      <div class="alert alert-danger" role="alert">
+        {% for error in field.errors %}
+            <span class="error-msg">{{ field.label }}: {{ error }}</span><br>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+{% endfor %}
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="inputCode"> *نام مشتری</label>
+      {{form.name}}
+    </div>
+    <div class="form-group">
+      <label for="inputCode"> *شماره تلفن مشتری</label>
+      {{form.phone_number}}
+    </div>
+    <div class="form-group">
+      <label for="inputCode">  کد ملی</label>
+      {{form.national_code}}
+    </div>
+    <div class="form-group">
+      <label for="inputCode"> کد اقتصادی</label>
+      {{form.economy_code}}
+    </div>
+    <div class="form-group">
+      <label for="inputCode"> *آدرس مشتری</label>
+      {{form.address}}
+    </div>
+    <div class="form-group">
+      <label for="inputCode">تابلو</label>
+      {{form.tablo}}
+    </div>
+    <div class="form-group">
+      <label for="inputCode"> وضعیت خرید مشتری</label>
+      {{form.client_status}}
+    </div>
+    <div class="form-group">
+      <label for="inputCode"> توضیحات</label>
+      {{form.description}}
+    </div>
+    <div class="form-group">
+      <label for="inputCode"> *مسیر</label>
+      {{form.route}}
+    </div>
+    <div class="form-group">
+      <label for="inputCode"> آیا تغییر آدرس داده؟</label>
+      {{form.is_changed_location}}
+    </div>
+    <div class="form-group">
+      <label for="inputCode"> آیا لیست سیاه است؟ </label>
+      {{form.is_black_list}}
+    </div>
+    <div class="form-group">
+      <label for="inputCode"> آیا  مشتری بد حساب است؟ </label>
+      {{form.is_dishonest}}
+    </div>
+    <button type="submit" class="btn btn-primary">ذخیره</button>
+</form>
+
+{% endblock %}

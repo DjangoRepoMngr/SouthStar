@@ -18,6 +18,7 @@ urlpatterns = [
 
     #client
     path('client_creator/', views.client_creator, name='client_creator'),
-
+    path('client_route/<int:id>', views.client_route_list, name='client_route'),
+    path('client_edit/<int:id>', views.client_edit, name='client_edit'),
 
 ]

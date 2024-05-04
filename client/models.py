@@ -19,7 +19,7 @@ class CustomUser(User):
 class route(GeneralModel):
 
     name = models.CharField(max_length=200, verbose_name='نام مسیر')
-    code = models.IntegerField('کد مسیر ',)
+    code = models.IntegerField('کد مسیر ',unique= True)
     visitor = models.ForeignKey( CustomUser ,on_delete=models.PROTECT, null=True, verbose_name='فروشنده')
 
     class Meta:

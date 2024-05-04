@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.urls import resolve, reverse
 from django.contrib.auth.decorators import login_required, user_passes_test
 from client.forms import CreateIRouteForm, ClientForm
-from client.models import route
+from client.models import route, client
 
 
 @csrf_exempt
@@ -127,3 +127,40 @@ def client_creator(request):
             context['form_errors'] = form.errors.as_ul()
 
     return render(request, 'client_creator.html',context)
+
+@login_required
+@csrf_exempt
+def client_edit(request, id):
+
+    obj = get_object_or_404(client, id = id)
+    form = ClientForm(request.POST or None, instance= obj)
+
+    context = {
+        'form' : form ,
+    }
+
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect('client:route_list')
+
+        else:
+            # Add form errors to context
+            context['form_errors'] = form.errors.as_ul()
+
+    return render(request, 'client_creator.html',context)
+
+
+
+@login_required
+@csrf_exempt
+def client_route_list(request,id):
+    """ shows the clients in a specific route """
+    client_list = client.objects.filter(route = id).filter(status = 1)
+    this_route = route.objects.filter(id = id)
+    context = {
+        'clients' : client_list ,
+        'route' : this_route[0],
+    }
+
+    return render(request, 'client_route_list.html',context)

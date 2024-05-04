@@ -1,0 +1,78 @@
+
+{% extends '_layout.html' %}
+{% load static %}
+
+<!-- JS BLOCK -->
+{% block jsBlock %}
+{% endblock %}
+<!-- CSS BLOCK -->
+{% block cssBlock %}
+{% endblock %}
+
+{% block pageContent %}
+<h3 class="title-5 m-b-35">لیست مشتری های مسیر {{ route.name }}</h3>
+<div class="table-responsive">
+  <div class="table-toolbar mb-3">
+    <a href="{% url 'client:client_creator' %}" class="btn btn-primary btn-sm float-right">افزودن مشتری <span class="fa fa-plus"></span></a>
+  </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">کد مشتری</th>
+          <th scope="col">نام مشتری</th>
+          <th scope="col"> م فعال</th>
+          <th scope="col"> م غیر فعال</th>
+          <th scope="col">م جابحا شده</th>
+          <th scope="col">م لیست سیاه</th>
+          <th scope="col">م بدحساب</th>
+          <th scope="col">نام فروشنده</th>
+          <th scope="col">عملیات</th>
+        </tr>
+      </thead>
+      <tbody>
+
+          {% for client in clients %}
+              <tr>
+                <td>{{ client.id }}</td>
+                <td> {{ client.name }} </td>
+
+                {% if client.client_status == 1 %}
+                  <td>بله</td>
+                  <td>-</td>
+                {% else %}
+                  <td>-</td>
+                  <td>بله</td>
+                {% endif %}
+
+                {% if client.is_changed_location %}
+                  <td>بله</td>
+                {% else %}
+                  <td>خیر</td>
+                {% endif %}
+
+                {% if client.is_black_list %}
+                  <td>بله</td>
+                {% else %}
+                  <td>خیر</td>
+                {% endif %}
+
+                {% if client.is_dishonest %}
+                  <td>بله</td>
+                {% else %}
+                  <td>خیر</td>
+                {% endif %}
+
+                <td>{{client.route.visitor }}</td>
+                <td>
+                  <div class="table-toolbar mb-3">
+                    <a href="{% url 'client:client_edit' id=client.id %}" class="btn btn-warning btn-sm">ویرایش</a>
+                  </div>
+                </td>
+              </tr>
+          {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+
+{% endblock %}

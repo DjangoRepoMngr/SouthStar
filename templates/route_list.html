@@ -17,16 +17,15 @@
   </div>
     <table class="table table-striped">
       <thead>
-        <tr>
-          <th scope="col">کد مسیر</th>
-          <th scope="col">نام مسیر</th>
-          <th scope="col"> م فعال</th>
-          <th scope="col"> م غیر فعال</th>
-          <th scope="col">م جابحا شده</th>
-          <th scope="col">م لیست سیاه</th>
-          <th scope="col">م بدحساب</th>
-          <th scope="col">نام فروشنده</th>
-          <th scope="col">عملیات</th>
+        <th class="sortable numeric" scope="col">کد مسیر <span class="sort-icon">&#8597;</span></th>
+        <th class="sortable" scope="col">نام مسیر <span class="sort-icon">&#8597;</span></th>
+        <th class="sortable numeric" scope="col"> م فعال <span class="sort-icon">&#8597;</span></th>
+        <th class="sortable numeric" scope="col"> م غیر فعال <span class="sort-icon">&#8597;</span></th>
+        <th class="sortable numeric" scope="col">م جابحا شده <span class="sort-icon">&#8597;</span></th>
+        <th class="sortable numeric" scope="col">م لیست سیاه <span class="sort-icon">&#8597;</span></th>
+        <th class="sortable numeric" scope="col">م بدحساب <span class="sort-icon">&#8597;</span></th>
+        <th class="sortable" scope="col">نام فروشنده <span class="sort-icon">&#8597;</span></th>
+        <th scope="col">عملیات</th>
         </tr>
       </thead>
       <tbody>
@@ -53,6 +52,48 @@
 
       </tbody>
     </table>
+
+    <script>
+      $(document).ready(function() {
+          $('.sortable').on('click', function() {
+              var $table = $(this).closest('table');
+              var columnIndex = $(this).index();
+              var isNumeric = $(this).hasClass('numeric');
+              var isAscending = $(this).hasClass('ascending');
+
+              // Toggle sorting direction
+              if (isAscending) {
+                  $(this).removeClass('ascending').addClass('descending').find('.sort-icon').html('&#8595;');
+              } else {
+                  $(this).removeClass('descending').addClass('ascending').find('.sort-icon').html('&#8593;');
+              }
+
+              var rows = $table.find('tbody > tr').get();
+
+              rows.sort(function(a, b) {
+                  var aValue = $(a).find('td').eq(columnIndex).text();
+                  var bValue = $(b).find('td').eq(columnIndex).text();
+
+                  if (isNumeric) {
+                      aValue = parseFloat(aValue.replace(/[^0-9.-]+/g,"")) || 0;
+                      bValue = parseFloat(bValue.replace(/[^0-9.-]+/g,"")) || 0;
+                  } else {
+                      aValue = aValue.toUpperCase();
+                      bValue = bValue.toUpperCase();
+                  }
+
+                  if (isAscending) {
+                      return aValue > bValue ? 1 : -1;
+                  } else {
+                      return aValue < bValue ? 1 : -1;
+                  }
+              });
+
+              $table.children('tbody').empty().append(rows);
+          });
+      });
+    </script>
+
   </div>
 
 {% endblock %}

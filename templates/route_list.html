@@ -15,7 +15,10 @@
   <div class="table-toolbar mb-3">
     <a href="/route_creator" class="btn btn-primary btn-sm float-right">افزودن مسیر <span class="fa fa-plus"></span></a>
   </div>
-    <table class="table table-striped">
+  <br>
+  <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="جستجو...">
+  <br>
+    <table id="myTable" class="table table-striped">
       <thead>
         <th class="sortable numeric" scope="col">کد مسیر <span class="sort-icon">&#8597;</span></th>
         <th class="sortable" scope="col">نام مسیر <span class="sort-icon">&#8597;</span></th>
@@ -93,6 +96,35 @@
           });
       });
     </script>
+
+
+<script>
+  function searchTable() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      var found = false;
+      td = tr[i].getElementsByTagName("td");
+      for (var j = 0; j < td.length; j++) {
+        if (td[j]) {
+          txtValue = td[j].textContent || td[j].innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            found = true;
+            break;
+          }
+        }
+      }
+      if (found) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+</script>
 
   </div>
 

@@ -6,8 +6,9 @@ from django.contrib import messages
 from django.urls import resolve, reverse
 from django.contrib.auth.decorators import login_required, user_passes_test
 from client.forms import CreateIRouteForm, ClientForm
-from client.models import route, client
-
+from .models import route, client
+from django.db.models import Count, Q
+from django.shortcuts import render
 
 @csrf_exempt
 def login_view(request):
@@ -74,7 +75,15 @@ def route_creator(request):
 @csrf_exempt
 def route_list(request):
 
-    list = route.objects.filter(status = 1)
+    list = route.objects.annotate(
+        active_count=Count('client', filter=Q(client__client_status=1)),
+        inactive_count=Count('client', filter=Q(client__client_status=0)),
+        black_list_count=Count('client', filter=Q(client__is_black_list=True)),
+        dishonest_count=Count('client', filter=Q(client__is_dishonest=True)),
+        changed_location_count=Count('client', filter=Q(client__is_changed_location=True)),
+        total_clients=Count('client')
+    ).filter(status = 1)
+
     name_query = request.GET.get('name_query')
 
     if name_query != None:

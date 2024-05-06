@@ -22,6 +22,7 @@
       <thead>
         <th class="sortable numeric" scope="col">کد مسیر <span class="sort-icon">&#8597;</span></th>
         <th class="sortable" scope="col">نام مسیر <span class="sort-icon">&#8597;</span></th>
+        <th class="sortable numeric" scope="col"> تعداد کل <span class="sort-icon">&#8597;</span></th>
         <th class="sortable numeric" scope="col"> م فعال <span class="sort-icon">&#8597;</span></th>
         <th class="sortable numeric" scope="col"> م غیر فعال <span class="sort-icon">&#8597;</span></th>
         <th class="sortable numeric" scope="col">م جابحا شده <span class="sort-icon">&#8597;</span></th>
@@ -37,11 +38,12 @@
               <tr>
                 <td>{{ item.code }}</td>
                 <td> {{ item.name }} </td>
-                <td>20</td>
-                <td>4</td>
-                <td>2</td>
-                <td>50</td>
-                <td>24</td>
+                <td>{{ item.total_clients }}</td>
+                <td>{{ item.active_count }}</td>
+                <td>{{ item.inactive_count }}</td>
+                <td>{{ item.changed_location_count }}</td>
+                <td>{{ item.black_list_count }}</td>
+                <td>{{ item.dishonest_count }}</td>
                 <td>{{ item.visitor }}</td>
                 <td>
                   <div class="table-toolbar mb-3">

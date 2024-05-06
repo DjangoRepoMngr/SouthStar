@@ -78,13 +78,10 @@ body {
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link" href="/route_list"> لیست مسیر</a>
+                <a class="nav-link" href="{% url 'client:route_list' %}"> لیست مسیر</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">خدمات</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">تماس</a>
+                <a class="nav-link" href="{% url 'client:logout' %}">خروج</a>
               </li>
             </ul>
           </div>

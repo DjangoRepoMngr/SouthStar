@@ -71,7 +71,6 @@ def route_creator(request):
     return render(request, 'route_creator.html',context)
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser or u.groups.filter(name='supervisor').exists())
 @csrf_exempt
 def route_list(request):
 
@@ -84,10 +83,8 @@ def route_list(request):
         total_clients=Count('client')
     ).filter(status = 1)
 
-    name_query = request.GET.get('name_query')
-
-    if name_query != None:
-        list = list.filter(name__contains = name_query)
+    if request.user.groups.filter(name='visitor').exists():
+        list = list.filter(visitor = request.user)
 
     context = {
         'list': list,

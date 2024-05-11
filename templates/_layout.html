@@ -65,6 +65,11 @@ body {
       text-align: center;
     }
 
+    @media print {
+  body {
+    display: none;
+        }
+  }
 </style>
 
 <body class="animsition">
@@ -85,6 +90,14 @@ body {
               </li>
             </ul>
           </div>
+
+
+          {% if user.get_full_name %}
+            <div class="navbar-text mr-auto"> {{ user.get_full_name }} </div>
+          {% else %}
+              <div class="navbar-text mr-auto"> {{ user.username }} </div>
+          {% endif %}
+
         </div>
       </nav>
 

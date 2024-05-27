@@ -16,6 +16,13 @@ class CustomUser(User):
     def __str__(self):
         return self.get_full_name() if self.get_full_name() else self.username
 
+class SupervisorVisitorRelationship(models.Model):
+    visitor = models.OneToOneField(User, verbose_name='فروشنده', on_delete=models.PROTECT)
+    supervisor = models.ForeignKey(User, related_name='سرپرست', on_delete=models.PROTECT)
+
+    def __str__(self):
+        return f"{self.visitor.username} supervised by {self.supervisor.username}"
+
 class route(GeneralModel):
 
     name = models.CharField(max_length=200, verbose_name='نام مسیر')

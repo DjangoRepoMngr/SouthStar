@@ -59,11 +59,9 @@
       <label for="inputCode"> توضیحات</label>
       {{form.description}}
     </div>
-    <div class="form-group d-none d-print-block">
+    <div class="form-group">
       <label for="inputCode"> *مسیر</label>
-      <select name="route" required id="id_route" class="form-control hidden">
-        <option value= {{id}} selected >مسیر ۱۲۰۵</option>
-      </select>
+      {{form.route}}
     </div>
     <div class="form-group">
       <label for="inputCode"> آیا تغییر آدرس داده؟</label>

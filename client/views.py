@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.urls import resolve, reverse
 from django.contrib.auth.decorators import login_required, user_passes_test
 from client.forms import CreateIRouteForm, ClientForm
-from .models import route, client
+from .models import route, client, SupervisorVisitorRelationship
 from django.db.models import Count, Q
 from django.shortcuts import render
 
@@ -53,11 +53,10 @@ def home(request):
     return render(request, 'Home.html')
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser or u.groups.filter(name='supervisor').exists())
 @csrf_exempt
 def route_creator(request):
 
-    form = CreateIRouteForm(request.POST or None)
+    form = CreateIRouteForm(request.POST or None, user = request.user)
 
     context = {
         'form' : form ,
@@ -83,6 +82,10 @@ def route_list(request):
         total_clients=Count('client')
     ).filter(status = 1)
 
+    if request.user.groups.filter(name='supervisor').exists():
+        supervisees = SupervisorVisitorRelationship.objects.filter(supervisor=request.user).values_list('visitor', flat=True)
+        list = list.filter(visitor__in=supervisees)
+
     if request.user.groups.filter(name='visitor').exists():
         list = list.filter(visitor = request.user)
 
@@ -94,12 +97,11 @@ def route_list(request):
 
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser or u.groups.filter(name='supervisor').exists())
 @csrf_exempt
 def route_edit(request,id):
 
     obj = get_object_or_404(route,id = id)
-    form = CreateIRouteForm(request.POST or None, instance= obj)
+    form = CreateIRouteForm(request.POST or None, instance= obj, user = request.user)
 
     context = {
         'form' : form ,
@@ -115,12 +117,13 @@ def route_edit(request,id):
 
 @login_required
 @csrf_exempt
-def client_creator(request):
+def client_creator(request,id):
 
     form = ClientForm(request.POST or None)
 
     context = {
         'form' : form ,
+        'id': id
     }
 
     if request.method == "POST":
@@ -154,7 +157,7 @@ def client_edit(request, id):
             # Add form errors to context
             context['form_errors'] = form.errors.as_ul()
 
-    return render(request, 'client_creator.html',context)
+    return render(request, 'client_editor.html',context)
 
 
 
